@@ -39,24 +39,20 @@ static char *realpath_safe(const char *path, char *resolved_path,
   }
 
   while (*path != '\0') {
-
     if (*path == '/') {
       path++;
       continue;
     }
-
     if (*path == '.' && (path[1] == '\0' || path[1] == '/')) {
       path++;
       continue;
     }
-
     if (*path == '.' && path[1] == '.' && (path[2] == '\0' || path[2] == '/')) {
       path += 2;
       while (npath > resolved_path + 1 && (--npath)[-1] != '/')
         ;
       continue;
     }
-
     while (*path != '\0' && *path != '/') {
       if (npath - resolved_path > maxreslth - 2) {
         errno = ENAMETOOLONG;
@@ -64,12 +60,10 @@ static char *realpath_safe(const char *path, char *resolved_path,
       }
       *npath++ = *path++;
     }
-
     if (readlinks++ > MAXSYMLINKS) {
       errno = ELOOP;
       return NULL;
     }
-
     /* symlink analyzed */
     *npath = '\0';
     n = readlink(resolved_path, link_path, PATH_MAX);
@@ -89,7 +83,6 @@ static char *realpath_safe(const char *path, char *resolved_path,
         while (*(--npath) != '/')
           ;
       }
-
       m = strlen(path);
       newbuf = alloca(m + n + 1);
       memcpy(newbuf, link_path, n);
