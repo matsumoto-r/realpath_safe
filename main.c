@@ -5,7 +5,6 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define MAX_FILENAME 256
 #ifndef MAXSYMLINKS
 #define MAXSYMLINKS 256
 #endif
